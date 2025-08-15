@@ -3,6 +3,12 @@
 
 ## 🛠 100 Days of DevOps Challenge
 
+![Made with Terraform](https://img.shields.io/badge/Made%20with-Terraform-623CE4?logo=terraform&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
+![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazonaws&logoColor=white)
+![GitHub](https://img.shields.io/badge/Version%20Control-GitHub-181717?logo=github)
+![DevOps](https://img.shields.io/badge/Focus-DevOps-blue)
+
 This repository documents my journey through the **#100DaysOfDevOps** challenge — 100 days of hands-on DevOps practice, problem-solving, and learning.  
 Each day covers a **real-world-inspired scenario**, from infrastructure automation to CI/CD, cloud migrations, Linux administration, security practices, and beyond.
 
