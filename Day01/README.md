@@ -22,7 +22,7 @@ The account must expire automatically on **2024-04-15**.
 ## 💻 Commands Used
 ```bash
 sudo useradd -e 2024-04-15 kareem
-sudo chage -l kareem
+sudo chage -l kareem  ## To check the account expiration date
 ```
 
 ## 📚 Learnings
