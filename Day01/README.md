@@ -23,6 +23,7 @@ The account must expire automatically on **2024-04-15**.
 ```bash
 sudo useradd -e 2024-04-15 kareem
 sudo chage -l kareem
+```
 
 ## 📚 Learnings
 
