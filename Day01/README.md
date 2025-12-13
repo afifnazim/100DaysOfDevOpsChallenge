@@ -23,3 +23,10 @@ The account must expire automatically on **2024-04-15**.
 ```bash
 sudo useradd -e 2024-04-15 kareem
 sudo chage -l kareem
+
+## 📚 Learnings
+
+- Temporary user accounts help reduce long-term security risks.
+- Setting an expiry date ensures access is automatically revoked.
+- The `useradd -e` option is useful for time-bound access control.
+- Always verify account details using `chage -l`.
