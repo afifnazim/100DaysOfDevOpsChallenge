@@ -1,33 +1,181 @@
-# Day 01 – Create Temporary Linux User
-
-## 📜 Challenge Description
-A developer named **kareem** requires temporary access to **App Server 1** in the Stratos Datacenter.
-The account must expire automatically on **2024-04-15**.
+# Day 001: Linux User Setup with Non-interactive Shell
 
 ---
 
-## ⚙️ Requirements
-- Username: `kareem` (lowercase)
-- Expiry date: `2024-04-15`
+## 🎯 Objective
+
+Create a user with a non-interactive shell for your organization on a specific server. This is essential for service accounts and automated processes that don't require interactive login capabilities.
 
 ---
 
-## 🛠 Approach
-1. SSH into App Server 1
-2. Create user with expiry date
-3. Verify expiry settings
+## 📋 Prerequisites
+
+* Access to a Linux server (CentOS/Ubuntu/RHEL)
+* `sudo` privileges
+* Basic understanding of Linux user management
 
 ---
 
-## 💻 Commands Used
+## 🔧 Technologies Used
+
+* Linux user management commands
+* SSH access
+* System administration
+
+---
+
+## 📝 Steps
+
+### 1. Login to the App Server
+
 ```bash
-sudo useradd -e 2024-04-15 kareem
-sudo chage -l kareem
+ssh user@app-server-ip
 ```
 
-## 📚 Learnings
+or
 
-- Temporary user accounts help reduce long-term security risks.
-- Setting an expiry date ensures access is automatically revoked.
-- The `useradd -e` option is useful for time-bound access control.
-- Always verify account details using `chage -l`.
+```bash
+ssh user@server-name
+```
+
+Enter the appropriate password when prompted.
+
+---
+
+### 2. Create a User with a Non-interactive Shell
+
+```bash
+sudo useradd -m -s /usr/sbin/nologin user-name
+```
+
+#### Explanation
+
+* `-m` : Creates a home directory under `/home/user-name`
+* `-s` : Specifies the login shell
+* `/usr/sbin/nologin` : Prevents interactive login
+
+---
+
+### 3. Verify User Creation
+
+```bash
+cat /etc/passwd
+```
+
+Locate the newly created user entry:
+
+```text
+kareem:x:1003:1004::/home/kareem:/usr/sbin/nologin
+```
+
+---
+
+### 4. Test User Login
+
+```bash
+sudo su user-name
+```
+
+Expected output:
+
+```text
+This account is currently not available.
+```
+
+---
+
+## ✅ Verification & Troubleshooting
+
+### Common Issues
+
+| Issue               | Solution                                                     |
+| ------------------- | ------------------------------------------------------------ |
+| Permission denied   | Ensure you have `sudo` privileges                            |
+| User already exists | Check existing users with `cat /etc/passwd \| grep username` |
+| Shell not found     | Verify `/usr/sbin/nologin` exists on your system             |
+
+---
+
+## 🛠 Additional Commands
+
+### List all users with a non-interactive shell
+
+```bash
+grep nologin /etc/passwd
+```
+
+### Check user details
+
+```bash
+id username
+```
+
+### Remove a user
+
+```bash
+sudo userdel -r username
+```
+
+---
+
+## 🔗 Related Topics
+
+* Day 002: Temporary User Setup with Expiry Date
+* Day 003: Secure SSH Root Access
+* Linux User Management Best Practices
+
+---
+
+## 📚 Key Takeaways
+
+* Non-interactive shells prevent direct user login.
+* Service accounts should use `/usr/sbin/nologin` or `/bin/false`.
+* Always verify user creation using multiple methods.
+* Understanding user shells is crucial for maintaining system security.
+
+---
+
+## 💡 Good to Know
+
+### Linux User Management
+
+#### User Types
+
+* Regular Users
+* System Users
+* Service Accounts
+
+#### Common Shell Types
+
+| Shell               | Purpose                         |
+| ------------------- | ------------------------------- |
+| `/bin/bash`         | Interactive user login          |
+| `/usr/sbin/nologin` | Non-interactive service account |
+| `/bin/false`        | Deny access completely          |
+
+#### User Databases
+
+* `/etc/passwd` → Stores user account information
+* `/etc/shadow` → Stores encrypted passwords
+
+---
+
+### Useful `useradd` Options
+
+| Option | Description                |
+| ------ | -------------------------- |
+| `-m`   | Create home directory      |
+| `-s`   | Specify shell              |
+| `-d`   | Custom home directory path |
+| `-g`   | Primary group              |
+| `-G`   | Additional groups          |
+| `-e`   | Account expiry date        |
+
+---
+
+### 🔒 Security Best Practices
+
+* Use non-interactive shells for service accounts.
+* Assign interactive shells only to users who require login access.
+* Verify user creation using multiple commands.
+* Follow the Principle of Least Privilege (PoLP).
